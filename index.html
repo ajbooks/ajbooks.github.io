@@ -53,6 +53,7 @@
     
     var url = document.location.href;
     var k = url.substr(url.lastIndexOf("pzid=")+2);
+    console.log(k);
     
     if(k){
       fetch(AS_URL_BASE+'?pzid='+k)
