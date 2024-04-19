@@ -71,7 +71,7 @@
 
     function callGoogleAppsScript(pzid) {
       const AS_URL_BASE = "https://script.google.com/macros/s/AKfycbx2TLyQCFNQNEbfp_Sb5SRHl9qTFEVVZa_ir-wU_R7mwzaRCI_Fxie3of-Bx5TYMzcoEg/exec";
-
+      pzid="Cocacola";
       fetch(AS_URL_BASE + '?pzid=' + pzid)
         .then(response => response.text())
        .then(data => {
