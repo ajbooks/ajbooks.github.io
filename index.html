@@ -7,36 +7,29 @@
     <h1>Bienvenido a mi página web</h1>
     <p>Parámetro pzid: <span id="pzid-value"></span></p>
 
-    <script>
-      function getParameterByName(name) {
-        var url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-        var results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-      }
+<script>
+  function getParameterFromPost() {
+    var formData = new FormData(event.request.body);
+    var pzid = formData.get('pzid');
+    return pzid;
+  }
 
-      var pzid = getParameterByName('pzid');
-      document.getElementById('pzid-value').textContent = pzid;
+  var pzid = getParameterFromPost();
+  document.getElementById('pzid-value').textContent = pzid;
 
-      // Llamada a la Apps Script de Google
-      var scriptUrl = 'https://script.google.com/macros/s/AKfycbw6HN7DbIH47lwtMRDJ7nKe-3RA81El92ziuqXKK6kF3dDuEc8ptFfxrhKq4vENRLB2bA/exec';
-      var payload = {
-        'pzid': pzid
-      };
+  // Llamada a la Apps Script de Google
+  var scriptUrl = 'https://script.google.com/macros/s/AKfycbw6HN7DbIH47lwtMRDJ7nKe-3RA81El92ziuqXKK6kF3dDuEc8ptFfxrhKq4vENRLB2bA/exec';
 
-      fetch(scriptUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => response.text())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
-    </script>
+  fetch(scriptUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'pzid=' + encodeURIComponent(pzid)
+  })
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+</script>
   </body>
 </html>
