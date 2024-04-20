@@ -19,12 +19,12 @@
         var pzid = getParameterByName('pzid');
         
         // Reemplaza 'URL_SERVICIO_WEB' con la URL de tu servicio web
-        fetch('https://script.google.com/macros/s/AKfycbyCCz_90qDPrLnknMCEVAO2iUk92UzBRH6sHaMlyegupdb2YffdhBAkm-DgnBRMU1WKYw/exec?pzid=' + pzid)
+        fetch('https://script.google.com/macros/s/AKfycbxymNZT-ZQnW_D39rTnSAtfN52HY2rpS_1n4jJNBzr17fRs5ZkVnoqIZyCZcC0fJ27AWA/exec?pzid=' + pzid)
           .then(response => response.text())
-          .then(base64 => {
-            if (base64) {
+          .then(urlImagen => {
+            if (urlImagen) {
               var img = document.createElement('img');
-              img.src = 'data:image/png;base64,' + base64;
+              img.src = urlImagen; // Asignar la URL directamente al atributo src
               document.body.appendChild(img);
             } else {
               document.body.innerHTML = '<h1>Imagen no encontrada</h1>';
@@ -37,7 +37,7 @@
       }
 
       // Llamar a la función al cargar la página
-      window.onload = cargarImagen;
+      window.onload = cargarImagen(); // Agregar los paréntesis para llamar la función
     </script>
   </head>
   <body>
