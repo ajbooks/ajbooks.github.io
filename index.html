@@ -19,17 +19,21 @@
         var pzid = getParameterByName('pzid');
         
         // Reemplaza 'URL_SERVICIO_WEB' con la URL de tu servicio web
-        fetch('https://script.google.com/macros/s/AKfycbzNcJ3JNt8X_Lo00T2hl9pGYdx8_NSNlAVcR9tCZ-46wXg8rrtzKWAuGe6oBsRxSgPdeg/exec?pzid=' + pzid)
-  .then(response => response.text())
-  .then(base64 => {
-             var img = document.createElement('img');
+        fetch('https://script.google.com/macros/s/AKfycbyCCz_90qDPrLnknMCEVAO2iUk92UzBRH6sHaMlyegupdb2YffdhBAkm-DgnBRMU1WKYw/exec?pzid=' + pzid)
+          .then(response => response.text())
+          .then(base64 => {
+            if (base64) {
+              var img = document.createElement('img');
               img.src = 'data:image/png;base64,' + base64;
               document.body.appendChild(img);
-  })
-  .catch(error => {
-    console.error(error);
-    document.body.innerHTML = '<h1>Error al cargar la imagen</h1>';
-  });
+            } else {
+              document.body.innerHTML = '<h1>Imagen no encontrada</h1>';
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            document.body.innerHTML = 'Error al cargar la imagen';
+          });
       }
 
       // Llamar a la función al cargar la página
